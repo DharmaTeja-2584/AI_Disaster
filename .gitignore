@@ -1,0 +1,41 @@
+# Dependencies
+node_modules/
+**/node_modules/
+package-lock.json.bak
+
+# Environment variables
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+!**/.env.example
+
+# Temporary and build artifacts
+dist/
+dist-ssr/
+build/
+coverage/
+*.zip
+scratch/
+.pytest_cache/
+__pycache__/
+*.pyc
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Binaries and drivers
+*.exe
+tests/drivers/
+
+# Editor & OS files
+.vscode/
+!.vscode/extensions.json
+.idea/
+.DS_Store
+Thumbs.db

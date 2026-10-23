@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Selenium Equivalence Partitioning Test Report</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #0b0f19; color: #e2e8f0; margin: 0; padding: 24px; }
+    .container { max-width: 1400px; margin: 0 auto; }
+    h1 { color: #f87171; border-bottom: 2px solid #1e293b; padding-bottom: 12px; }
+    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px; }
+    .stat-card { background: #161e2e; border: 1px solid #1e293b; border-radius: 8px; padding: 16px; text-align: center; }
+    .stat-value { font-size: 28px; font-weight: bold; margin-top: 4px; }
+    .text-success { color: #4ade80; }
+    .text-fail { color: #f87171; }
+    .text-info { color: #60a5fa; }
+    table { width: 100%; border-collapse: collapse; margin-top: 16px; background: #111827; border-radius: 8px; overflow: hidden; }
+    th, td { padding: 12px 14px; text-align: left; border-bottom: 1px solid #1e293b; font-size: 13px; }
+    th { background: #1e293b; color: #94a3b8; font-weight: 600; text-transform: uppercase; font-size: 11px; }
+    tr:hover { background: #1a2234; }
+    .badge { display: inline-block; padding: 4px 8px; border-radius: 4px; font-weight: bold; font-size: 11px; }
+    .badge-pass { background: rgba(74, 222, 128, 0.2); color: #4ade80; border: 1px solid rgba(74, 222, 128, 0.4); }
+    .badge-fail { background: rgba(248, 113, 113, 0.2); color: #f87171; border: 1px solid rgba(248, 113, 113, 0.4); }
+    .tag { font-family: monospace; background: #1e293b; padding: 2px 6px; border-radius: 3px; font-size: 11px; }
+    a { color: #60a5fa; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🛡️ Equivalence Class Partitioning (ECP) — Automated Selenium Suite</h1>
+    <p style="color: #94a3b8;">Full-Stack Verification of Input Domains, Validation Boundaries, and AI Triage Heuristics</p>
+    
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div style="font-size: 12px; color: #94a3b8; text-transform: uppercase;">Total Partitions</div>
+        <div class="stat-value text-info">17</div>
+      </div>
+      <div class="stat-card">
+        <div style="font-size: 12px; color: #94a3b8; text-transform: uppercase;">Passed</div>
+        <div class="stat-value text-success">17</div>
+      </div>
+      <div class="stat-card">
+        <div style="font-size: 12px; color: #94a3b8; text-transform: uppercase;">Failed</div>
+        <div class="stat-value text-fail">0</div>
+      </div>
+      <div class="stat-card">
+        <div style="font-size: 12px; color: #94a3b8; text-transform: uppercase;">Success Rate</div>
+        <div class="stat-value text-success">100.0%</div>
+      </div>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Test ID</th>
+          <th>Subsystem</th>
+          <th>Input Domain</th>
+          <th>Partition Type</th>
+          <th>Test Values</th>
+          <th>Expected Outcome</th>
+          <th>Status</th>
+          <th>Screenshot</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>ECP-REG-01</strong></td>
+          <td>Civilian Registration</td>
+          <td>Full Name, Email, Password, Confirm</td>
+          <td><span class="tag">Valid (VEC)</span></td>
+          <td style="font-family: monospace; font-size: 12px;">Name: 'Maria Santos', Email: 'unique@safety.org', Pwd: 'Passcode123!'</td>
+          <td>Form submits successfully, civilian account created, dashboard reached</td>
+          <td><span class="badge badge-pass">PASSED</span></td>
+          <td><a href="../screenshots/ECP_REG_Valid_Submission.png" target="_blank">View PNG</a></td>
+        </tr>
+        <tr>
+          <td><strong>ECP-REG-02</strong></td>
+          <td>Civilian Registration</td>
+          <td>Full Name</td>
+          <td><span class="tag">Invalid (IEC: Length < 2)</span></td>
+          <td style="font-family: monospace; font-size: 12px;">Name: 'X' (1 character)</td>
+          <td>Validation error: 'Name must be at least 2 characters'</td>
+          <td><span class="badge badge-pass">PASSED</span></td>
+          <td><a href="../screenshots/ECP_REG_Name_Too_Short.png" target="_blank">View PNG</a></td>
+        </tr>
+        <tr>
+          <td><strong>ECP-REG-03</strong></td>
+          <td>Civilian Registration</td>
+          <td>Email Address</td>
+          <td><span class="tag">Invalid (IEC: Non-RFC email)</span></td>
+          <td style="font-family: monospace; font-size: 12px;">Email: 'invalid-email-address' (missing @ and domain)</td>
+          <td>HTML5 constraint & React error: 'Valid email is required'</td>
+          <td><span class="badge badge-pass">PASSED</span></td>
+          <td><a href="../screenshots/ECP_REG_Email_Invalid.png" target="_blank">View PNG</a></td>
+        </tr>
+        <tr>
+          <td><strong>ECP-REG-04</strong></td>
+          <td>Civilian Registration</td>
+          <td>Password</td>
+          <td><span class="tag">Invalid (IEC: Length < 8)</span></td>
+          <td style="font-family: monospace; font-size: 12px;">Password: '12345' (5 characters)</td>
+          <td>Validation error: 'Password must be at least 8 characters'</td>
+          <td><span class="badge badge-pass">PASSED</span></td>
+          <td><a href="../screenshots/ECP_REG_Password_Too_Short.png" target="_blank">View PNG</a></td>
+        </tr>
+        <tr>
+          <td><strong>ECP-REG-05</strong></td>
+          <td>Civilian Registration</td>
+          <td>Confirm Password</td>
+          <td><span class="tag">Invalid (IEC: Mismatched values)</span></td>
+          <td style="font-family: monospace; font-size: 12px;">Password: 'CorrectPass123!', Confirm: 'DifferentPass456!'</td>
+          <td>Validation error: 'Passwords do not match'</td>
+          <td><span class="badge badge-pass">PASSED</span></td>
+          <td><a href="../screenshots/ECP_REG_Password_Mismatch.png" target="_blank">View PNG</a></td>
+        </tr>
+        <tr>
+          <td><strong>ECP-AUTH-01</strong></td>
+          <td>Authentication / Login</td>
+          <td>Civilian Credentials</td>
+          <td><span class="tag">Valid (VEC)</span></td>
+          <td style="font-family: monospace; font-size: 12px;">Email: 'civilian@demo.com', Password: 'demo1234'</td>
+          <td>Authentication succeeds, redirected to '/civilian/dashboard'</td>
+          <td><span class="badge badge-pass">PASSED</span></td>
+          <td><a href="../screenshots/ECP_AUTH_Valid_Civilian.png" target="_blank">View PNG</a></td>
+        </tr>
+        <tr>
+          <td><strong>ECP-AUTH-02</strong></td>
+          <td>Authentication / Login</td>
+          <td>Commander Credentials</td>
+          <td><span class="tag">Valid (VEC: Role RBAC)</span></td>
+          <td style="font-family: monospace; font-size: 12px;">Email: 'commander@demo.com', Password: 'demo1234'</td>
+          <td>Authentication succeeds, redirected to '/commander/command-center'</td>
+          <td><span class="badge badge-pass">PASSED</span></td>
+          <td><a href="../screenshots/ECP_AUTH_Valid_Commander.png" target="_blank">View PNG</a></td>
+        </tr>
+        <tr>
+          <td><strong>ECP-AUTH-03</strong></td>
+          <td>Authentication / Login</td>
+          <td>Password</td>
+          <td><span class="tag">Invalid (IEC: Incorrect Password)</span></td>
+          <td style="font-family: monospace; font-size: 12px;">Email: 'civilian@demo.com', Password: 'WrongSecret999!'</td>
+          <td>Access denied, alert banner displays 'Login failed'</td>
+          <td><span class="badge badge-pass">PASSED</span></td>
+          <td><a href="../screenshots/ECP_AUTH_Invalid_Password.png" target="_blank">View PNG</a></td>
+        </tr>
+        <tr>
+          <td><strong>ECP-AUTH-04</strong></td>
+          <td>Authentication / Login</td>
+          <td>Email Address</td>
+          <td><span class="tag">Invalid (IEC: Unregistered Account)</span></td>
+          <td style="font-family: monospace; font-size: 12px;">Email: 'unknown_ghost_account@nonexistent.org'</td>
+          <td>Access denied, alert banner displays 'Login failed'</td>
+          <td><span class="badge badge-pass">PASSED</span></td>
+          <td><a href="../screenshots/ECP_AUTH_Nonexistent_Account.png" target="_blank">View PNG</a></td>
+        </tr>
+        <tr>
+          <td><strong>ECP-AUTH-05</strong></td>
+          <td>Authentication / Login</td>
+          <td>Email & Password Fields</td>
+          <td><span class="tag">Invalid (IEC: Empty Inputs)</span></td>
+          <td style="font-family: monospace; font-size: 12px;">Email: '', Password: ''</td>
+          <td>Client errors: 'Email is required' & 'Password is required'</td>
+          <td><span class="badge badge-pass">PASSED</span></td>
+          <td><a href="../screenshots/ECP_AUTH_Empty_Inputs.png" target="_blank">View PNG</a></td>
+        </tr>
+        <tr>
+          <td><strong>ECP-INC-01</strong></td>
+          <td>Incident Intake & AI Triage</td>
+          <td>Description</td>
+          <td><span class="tag">Invalid (IEC: Length < 5)</span></td>
+          <td style="font-family: monospace; font-size: 12px;">Description: 'Fire' (4 characters)</td>
+          <td>Validation error: 'Description must be at least 5 characters'</td>
+          <td><span class="badge badge-pass">PASSED</span></td>
+          <td><a href="../screenshots/ECP_INC_Description_Too_Short.png" target="_blank">View PNG</a></td>
+        </tr>
+        <tr>
+          <td><strong>ECP-INC-02</strong></td>
+          <td>Incident Intake & AI Triage</td>
+          <td>Coordinates</td>
+          <td><span class="tag">Invalid (IEC: Empty Coordinates)</span></td>
+          <td style="font-family: monospace; font-size: 12px;">Latitude: '', Longitude: ''</td>
+          <td>Errors: 'Valid latitude is required' & 'Valid longitude is required'</td>
+          <td><span class="badge badge-pass">PASSED</span></td>
+          <td><a href="../screenshots/ECP_INC_Empty_Coordinates.png" target="_blank">View PNG</a></td>
+        </tr>
+        <tr>
+          <td><strong>ECP-INC-03</strong></td>
+          <td>Incident Intake & AI Triage</td>
+          <td>AI Severity Scoring (Critical)</td>
+          <td><span class="tag">Valid (VEC: Critical Class 7-10)</span></td>
+          <td style="font-family: monospace; font-size: 12px;">Building Collapse, Trapped victims, Fire, Casualties: 3, Injuries: 12</td>
+          <td>Severity 7-10/10, Priority 'High', AI Recommendation computed</td>
+          <td><span class="badge badge-pass">PASSED</span></td>
+          <td><a href="../screenshots/ECP_AI_Triage_High_Critical.png" target="_blank">View PNG</a></td>
+        </tr>
+        <tr>
+          <td><strong>ECP-INC-04</strong></td>
+          <td>Incident Intake & AI Triage</td>
+          <td>AI Severity Scoring (Low)</td>
+          <td><span class="tag">Valid (VEC: Low Class 1-5)</span></td>
+          <td style="font-family: monospace; font-size: 12px;">Minor Flood, puddle on curb, Casualties: 0, Injuries: 0, No critical tags</td>
+          <td>Severity 1-5/10, Priority 'Low', Incident registered</td>
+          <td><span class="badge badge-pass">PASSED</span></td>
+          <td><a href="../screenshots/ECP_AI_Triage_Low_Severity.png" target="_blank">View PNG</a></td>
+        </tr>
+        <tr>
+          <td><strong>ECP-RES-01</strong></td>
+          <td>Resource Allocation</td>
+          <td>Quantity</td>
+          <td><span class="tag">Valid (VEC: 1 <= Qty <= Stock)</span></td>
+          <td style="font-family: monospace; font-size: 12px;">Quantity: 2 (within available inventory)</td>
+          <td>Confirm Allocation button enabled, remaining stock projected</td>
+          <td><span class="badge badge-pass">PASSED</span></td>
+          <td><a href="../screenshots/ECP_RES_Valid_Quantity.png" target="_blank">View PNG</a></td>
+        </tr>
+        <tr>
+          <td><strong>ECP-RES-02</strong></td>
+          <td>Resource Allocation</td>
+          <td>Quantity</td>
+          <td><span class="tag">Invalid (IEC: Quantity <= 0)</span></td>
+          <td style="font-family: monospace; font-size: 12px;">Quantity: 0</td>
+          <td>Confirm Allocation button disabled by business boundary logic</td>
+          <td><span class="badge badge-pass">PASSED</span></td>
+          <td><a href="../screenshots/ECP_RES_Zero_Quantity.png" target="_blank">View PNG</a></td>
+        </tr>
+        <tr>
+          <td><strong>ECP-RES-03</strong></td>
+          <td>Resource Allocation</td>
+          <td>Quantity</td>
+          <td><span class="tag">Invalid (IEC: Over-Allocation)</span></td>
+          <td style="font-family: monospace; font-size: 12px;">Quantity: 999999 (exceeds inventory)</td>
+          <td>Confirm button disabled, warning: 'exceeds available inventory'</td>
+          <td><span class="badge badge-pass">PASSED</span></td>
+          <td><a href="../screenshots/ECP_RES_Over_Allocation.png" target="_blank">View PNG</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>

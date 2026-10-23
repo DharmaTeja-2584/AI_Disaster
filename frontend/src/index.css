@@ -1,0 +1,509 @@
+/* ============================================================
+   AI Disaster Response — Global Stylesheet
+   Dark Emergency Operations Center Design System
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ──────────────────────────────────────────────────────────────
+   CSS Custom Properties
+────────────────────────────────────────────────────────────── */
+:root {
+  --bg-primary:     #07090f;
+  --bg-surface:     #0d1117;
+  --bg-card:        #111827;
+  --bg-hover:       #1a2332;
+  --border:         #1f2937;
+  --border-subtle:  #151e2d;
+
+  --text-primary:   #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-muted:     #64748b;
+  --text-dim:       #374151;
+
+  --red:        #dc2626;
+  --red-light:  #ef4444;
+  --red-subtle: #1a0808;
+
+  --orange:        #ea580c;
+  --orange-light:  #f97316;
+  --orange-subtle: #1a0e05;
+
+  --green:        #16a34a;
+  --green-light:  #22c55e;
+  --green-subtle: #071a0d;
+
+  --blue:        #2563eb;
+  --blue-light:  #3b82f6;
+  --blue-subtle: #050e1f;
+
+  --sidebar-width: 240px;
+  --topnav-height: 56px;
+}
+
+/* ──────────────────────────────────────────────────────────────
+   Base Reset
+────────────────────────────────────────────────────────────── */
+@layer base {
+  *, *::before, *::after {
+    @apply box-border;
+  }
+
+  html {
+    @apply scroll-smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    @apply min-h-screen;
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar        { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track  { background: var(--bg-surface); }
+  ::-webkit-scrollbar-thumb  { background: #2d3748; border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: #4a5568; }
+
+  a { @apply text-info-light no-underline; }
+  a:hover { @apply text-info; }
+
+  input, textarea, select {
+    @apply outline-none;
+    font-family: inherit;
+  }
+}
+
+/* ──────────────────────────────────────────────────────────────
+   Component Utilities
+────────────────────────────────────────────────────────────── */
+@layer components {
+
+  /* ── Card ─────────────────────────────────────────────────── */
+  .card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border);
+    @apply rounded-md shadow-card;
+  }
+
+  .card-header {
+    border-bottom: 1px solid var(--border);
+    @apply px-4 py-3 flex items-center justify-between;
+  }
+
+  .card-body {
+    @apply p-4;
+  }
+
+  /* ── Metric Card ──────────────────────────────────────────── */
+  .metric-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border);
+    @apply rounded-md p-4 shadow-card transition-colors duration-150;
+  }
+
+  .metric-card:hover {
+    border-color: #2d3748;
+  }
+
+  .metric-value {
+    @apply text-2xl font-bold leading-none;
+  }
+
+  .metric-label {
+    color: var(--text-muted);
+    @apply text-xs font-medium uppercase tracking-widest mt-1;
+  }
+
+  /* ── Buttons ──────────────────────────────────────────────── */
+  .btn {
+    @apply inline-flex items-center gap-2 px-3 py-1.5 rounded text-sm font-medium
+           transition-all duration-150 disabled:opacity-40 disabled:cursor-not-allowed
+           focus:outline-none focus:ring-2 focus:ring-offset-1;
+    focus-ring-offset-color: var(--bg-card);
+  }
+
+  .btn-primary {
+    @apply btn bg-info hover:bg-info-dark text-white focus:ring-info;
+  }
+
+  .btn-danger {
+    @apply btn bg-emergency hover:bg-emergency-dark text-white focus:ring-emergency;
+  }
+
+  .btn-warning {
+    @apply btn bg-warning hover:bg-warning-dark text-white focus:ring-warning;
+  }
+
+  .btn-success {
+    @apply btn bg-success hover:bg-success-dark text-white focus:ring-success;
+  }
+
+  .btn-ghost {
+    background-color: transparent;
+    color: var(--text-secondary);
+    border: 1px solid var(--border);
+    @apply btn hover:bg-eoc-hover;
+  }
+
+  .btn-sm {
+    @apply px-2 py-1 text-xs;
+  }
+
+  .btn-icon {
+    @apply btn p-1.5;
+  }
+
+  /* ── Badges / Pills ───────────────────────────────────────── */
+  .badge {
+    @apply inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs font-semibold uppercase tracking-wide;
+  }
+
+  .badge-high {
+    @apply badge;
+    background-color: var(--red-subtle);
+    color: var(--red-light);
+    border: 1px solid rgba(220, 38, 38, 0.3);
+  }
+
+  .badge-medium {
+    @apply badge;
+    background-color: var(--orange-subtle);
+    color: var(--orange-light);
+    border: 1px solid rgba(234, 88, 12, 0.3);
+  }
+
+  .badge-low {
+    @apply badge;
+    background-color: var(--green-subtle);
+    color: var(--green-light);
+    border: 1px solid rgba(22, 163, 74, 0.3);
+  }
+
+  .badge-info {
+    @apply badge;
+    background-color: var(--blue-subtle);
+    color: var(--blue-light);
+    border: 1px solid rgba(37, 99, 235, 0.3);
+  }
+
+  .badge-neutral {
+    @apply badge;
+    background-color: #0f172a;
+    color: var(--text-secondary);
+    border: 1px solid var(--border);
+  }
+
+  /* ── Status Pills ─────────────────────────────────────────── */
+  .status-pill {
+    @apply inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium;
+  }
+
+  .status-dot {
+    @apply w-1.5 h-1.5 rounded-full;
+  }
+
+  .status-available   { @apply status-pill; background: var(--green-subtle);  color: var(--green-light); }
+  .status-deployed    { @apply status-pill; background: var(--blue-subtle);   color: var(--blue-light); }
+  .status-active      { @apply status-pill; background: var(--red-subtle);    color: var(--red-light); }
+  .status-resolved    { @apply status-pill; background: var(--green-subtle);  color: var(--green-light); }
+  .status-reported    { @apply status-pill; background: #1a1408;              color: #fbbf24; }
+  .status-triaged     { @apply status-pill; background: var(--orange-subtle); color: var(--orange-light); }
+  .status-contained   { @apply status-pill; background: #071220;              color: #60a5fa; }
+  .status-offduty     { @apply status-pill; background: #0f0f0f;              color: var(--text-muted); }
+  .status-full        { @apply status-pill; background: var(--red-subtle);    color: var(--red-light); }
+  .status-nearCapacity { @apply status-pill; background: var(--orange-subtle); color: var(--orange-light); }
+
+  /* ── Tables ───────────────────────────────────────────────── */
+  .data-table {
+    @apply w-full text-sm;
+    border-collapse: collapse;
+  }
+
+  .data-table th {
+    background-color: var(--bg-surface);
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--border);
+    @apply px-3 py-2.5 text-left text-xs font-semibold uppercase tracking-wider sticky top-0 z-10;
+  }
+
+  .data-table td {
+    border-bottom: 1px solid var(--border-subtle);
+    @apply px-3 py-2.5;
+  }
+
+  .data-table tr:hover td {
+    background-color: var(--bg-hover);
+  }
+
+  .data-table tr:last-child td {
+    border-bottom: none;
+  }
+
+  /* ── Form Inputs ──────────────────────────────────────────── */
+  .form-input {
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border);
+    color: var(--text-primary);
+    @apply w-full rounded px-3 py-2 text-sm
+           placeholder:text-gray-600
+           focus:border-info focus:ring-1 focus:ring-info
+           transition-colors duration-150;
+  }
+
+  .form-input:disabled {
+    @apply opacity-50 cursor-not-allowed;
+  }
+
+  .form-label {
+    color: var(--text-secondary);
+    @apply block text-xs font-medium uppercase tracking-wide mb-1;
+  }
+
+  .form-error {
+    @apply text-xs mt-1;
+    color: var(--red-light);
+  }
+
+  .form-group {
+    @apply flex flex-col gap-1;
+  }
+
+  .form-select {
+    @apply form-input cursor-pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%236b7280'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.5rem center;
+    background-size: 1.25em;
+    padding-right: 2.5rem;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  /* ── Sidebar ──────────────────────────────────────────────── */
+  .sidebar {
+    width: var(--sidebar-width);
+    background-color: var(--bg-surface);
+    border-right: 1px solid var(--border);
+    @apply flex flex-col h-full flex-shrink-0;
+  }
+
+  .nav-item {
+    @apply flex items-center gap-3 px-4 py-2.5 mx-2 rounded text-sm font-medium
+           transition-all duration-150 cursor-pointer select-none;
+    color: var(--text-muted);
+  }
+
+  .nav-item:hover {
+    background-color: var(--bg-hover);
+    color: var(--text-secondary);
+  }
+
+  .nav-item.active {
+    background-color: rgba(37, 99, 235, 0.12);
+    color: var(--blue-light);
+    border-left: 2px solid var(--blue);
+    margin-left: 6px;
+    padding-left: 14px;
+  }
+
+  .nav-section-label {
+    color: var(--text-dim);
+    @apply px-6 pt-4 pb-1 text-2xs font-semibold uppercase tracking-widest;
+  }
+
+  /* ── Top Navigation ───────────────────────────────────────── */
+  .topnav {
+    height: var(--topnav-height);
+    background-color: var(--bg-surface);
+    border-bottom: 1px solid var(--border);
+    @apply flex items-center justify-between px-4 flex-shrink-0;
+  }
+
+  /* ── Page Header ──────────────────────────────────────────── */
+  .page-header {
+    border-bottom: 1px solid var(--border);
+    @apply px-6 py-4 flex items-center justify-between;
+  }
+
+  .page-title {
+    @apply text-lg font-semibold;
+    color: var(--text-primary);
+  }
+
+  .page-subtitle {
+    @apply text-xs mt-0.5;
+    color: var(--text-muted);
+  }
+
+  /* ── Search ───────────────────────────────────────────────── */
+  .search-input {
+    @apply form-input pl-9;
+  }
+
+  .search-wrapper {
+    @apply relative;
+  }
+
+  .search-icon {
+    @apply absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none;
+    color: var(--text-muted);
+  }
+
+  /* ── Severity Bar ─────────────────────────────────────────── */
+  .severity-bar {
+    @apply w-full rounded-full overflow-hidden;
+    height: 4px;
+    background-color: var(--border);
+  }
+
+  .severity-fill {
+    height: 100%;
+    @apply rounded-full transition-all duration-500;
+  }
+
+  /* ── Live Indicator ───────────────────────────────────────── */
+  .live-dot {
+    @apply w-2 h-2 rounded-full bg-success animate-pulse-slow;
+  }
+
+  /* ── Modal ────────────────────────────────────────────────── */
+  .modal-overlay {
+    @apply fixed inset-0 z-50 flex items-center justify-center p-4;
+    background-color: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(2px);
+  }
+
+  .modal-panel {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border);
+    @apply w-full max-w-lg rounded-lg shadow-modal animate-fade-in;
+  }
+
+  .modal-header {
+    border-bottom: 1px solid var(--border);
+    @apply px-5 py-4 flex items-center justify-between;
+  }
+
+  .modal-body {
+    @apply px-5 py-4;
+  }
+
+  .modal-footer {
+    border-top: 1px solid var(--border);
+    @apply px-5 py-3 flex items-center justify-end gap-3;
+  }
+
+  /* ── Toast ────────────────────────────────────────────────── */
+  .toast {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border);
+    @apply flex items-start gap-3 p-3 rounded-md shadow-panel max-w-sm w-full animate-slide-in;
+  }
+
+  .toast-success { border-left: 3px solid var(--green); }
+  .toast-error   { border-left: 3px solid var(--red); }
+  .toast-warning { border-left: 3px solid var(--orange); }
+  .toast-info    { border-left: 3px solid var(--blue); }
+
+  /* ── Skeleton ─────────────────────────────────────────────── */
+  .skeleton {
+    background: linear-gradient(90deg, #111827 25%, #1f2937 50%, #111827 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    @apply rounded;
+  }
+
+  @keyframes shimmer {
+    0%   { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+
+  /* ── Empty / Error States ─────────────────────────────────── */
+  .empty-state {
+    @apply flex flex-col items-center justify-center py-16 px-4 text-center;
+  }
+
+  .empty-state-icon {
+    color: var(--text-dim);
+    @apply w-12 h-12 mb-4;
+  }
+
+  .empty-state-title {
+    color: var(--text-secondary);
+    @apply text-base font-medium mb-1;
+  }
+
+  .empty-state-description {
+    color: var(--text-muted);
+    @apply text-sm;
+  }
+
+  /* ── Divider ──────────────────────────────────────────────── */
+  .divider {
+    border-color: var(--border);
+    @apply border-t my-4;
+  }
+
+  /* ── Alert Banners ────────────────────────────────────────── */
+  .alert-critical {
+    background-color: var(--red-subtle);
+    border: 1px solid rgba(220, 38, 38, 0.3);
+    color: var(--red-light);
+    @apply rounded px-4 py-3 text-sm;
+  }
+
+  .alert-warning {
+    background-color: var(--orange-subtle);
+    border: 1px solid rgba(234, 88, 12, 0.3);
+    color: var(--orange-light);
+    @apply rounded px-4 py-3 text-sm;
+  }
+
+  .alert-info-box {
+    background-color: var(--blue-subtle);
+    border: 1px solid rgba(37, 99, 235, 0.3);
+    color: var(--blue-light);
+    @apply rounded px-4 py-3 text-sm;
+  }
+
+  /* ── Pagination ───────────────────────────────────────────── */
+  .pagination-btn {
+    @apply btn-ghost btn-sm px-3 py-1.5;
+  }
+
+  .pagination-btn.active {
+    background-color: var(--blue-subtle);
+    color: var(--blue-light);
+    border-color: rgba(37, 99, 235, 0.3);
+  }
+
+  /* ── Tabs ─────────────────────────────────────────────────── */
+  .tab-bar {
+    border-bottom: 1px solid var(--border);
+    @apply flex gap-1 px-4;
+  }
+
+  .tab-item {
+    @apply px-4 py-2.5 text-sm font-medium cursor-pointer transition-colors duration-150;
+    color: var(--text-muted);
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+  }
+
+  .tab-item:hover { color: var(--text-secondary); }
+
+  .tab-item.active {
+    color: var(--blue-light);
+    border-bottom-color: var(--blue);
+  }
+}
